@@ -24,27 +24,28 @@ $(document).ready(function () {
                 method: "GET"
             }).then(function (regards) {
                 var uvI = regards.current.uvi
-                var futureTemp = regards.daily[0].temp.day;
-                var futureHumidity = regards.daily[0].humidity;
-                var futureIcon = regards.daily[0].weather[0].icon;
 
                 for (let i = 0; i < 5; i++) {
-                    var div = $("div");
-                    div.text(boogers)
 
-                }
+                    var futureTemp = regards.daily[i].temp.day;
+                    var futureHumidity = regards.daily[i].humidity;
+                    var futureIcon = regards.daily[i].weather[0].icon;
+                    var img = $("<img>").attr("src", "https://openweathermap.org/img/w/" + futureIcon + ".png");
+                    console.log(img)
+                    $("#temp").append(img);
 
-            }
+                };
 
-                console.log(regards);
-
-
-
+            });
         });
+
+
+
 
 
     });
 
-})
+
+
 
 });
