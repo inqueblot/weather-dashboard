@@ -24,15 +24,20 @@ $(document).ready(function () {
                 method: "GET"
             }).then(function (regards) {
                 var uvI = regards.current.uvi
+                console.log(regards);
 
-                for (let i = 0; i < 5; i++) {
+                for (let i = 1; i < 8; i++) {
 
                     var futureTemp = regards.daily[i].temp.day;
                     var futureHumidity = regards.daily[i].humidity;
                     var futureIcon = regards.daily[i].weather[0].icon;
                     var img = $("<img>").attr("src", "https://openweathermap.org/img/w/" + futureIcon + ".png");
+                    var span = $("<div>").text("temp: " + futureTemp + "\xb0")
+                    var span2 = $("<div>").text("humidity: " + futureHumidity + "%")
                     console.log(img)
                     $("#temp").append(img);
+                    $("#temp").append(span);
+                    $("#temp").append(span2);
 
                 };
 
