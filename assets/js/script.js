@@ -7,6 +7,9 @@ $(document).ready(function () {
     var day = now._d.getDay()
     console.log(date)
     console.log(day)
+    var recentSearch = localStorage.getItem("recent search")
+    var lastCity = localStorage.getItem("current search")
+    console.log(typeof recentSearch)
 
     // console.log("hello world")
     function getWeather() {
@@ -57,8 +60,10 @@ $(document).ready(function () {
                 for (let i = 0; i < cityNameArr.length; i++) {
                     var cityButton = $("<button>").text(cityNameArr[i]);
                     $("#cityBtn").append(cityButton);
-
                 };
+
+                localStorage.setItem('recent search', cityNameArr)
+                localStorage.setItem("current search", cityName)
 
 
 
