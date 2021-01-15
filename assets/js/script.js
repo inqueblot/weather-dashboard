@@ -8,16 +8,19 @@ $(document).ready(function () {
 
     var cityNameArr = JSON.parse(localStorage.getItem("recent search"));
 
-    for (let i = 0; i < cityNameArr.length; i++) {
-        var cityButton = $("<button>").text(cityNameArr[i]);
-        cityButton.addClass("reSearch");
-        $("#cityBtn").append(cityButton);
-    };
+    if (cityNameArr != null) {
+        for (let i = 0; i < cityNameArr.length; i++) {
+            var cityButton = $("<button>").text(cityNameArr[i]);
+            cityButton.addClass("reSearch");
+            $("#cityBtn").append(cityButton);
+        };
+    }
+
 
     var lastCity = localStorage.getItem("current search");
 
     queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + lastCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
-    
+
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -46,7 +49,7 @@ $(document).ready(function () {
             var currentUVI = $("<div>").text(uvI);
             var dayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
             var dayOfWeek = dayArr[day];
-          
+
             // this creates the current forecast
             var currentDate = $("<div>").text(dayOfWeek + ", " + date);
             $("#current").append(currentDate, currentCity, currentImg, currentTemp, currentHumid, currentWind, currentUVI);
@@ -84,8 +87,8 @@ $(document).ready(function () {
             };
         });
     });
-  
-function getWeather() {
+
+    function getWeather() {
 
         $("#future").empty();
         $("#current").empty();
