@@ -1,8 +1,6 @@
 $(document).ready(function () {
 
     var now = moment();
-    // var cityNameArr = [];
-    console.log(now);
     var date = now._d.getDate();
     var day = now._d.getDay();
 
@@ -14,6 +12,7 @@ $(document).ready(function () {
             cityButton.addClass("reSearch");
             $("#cityBtn").append(cityButton);
         };
+
     }
 
 
@@ -49,8 +48,7 @@ $(document).ready(function () {
             var currentUVI = $("<div>").text(uvI);
             var dayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
             var dayOfWeek = dayArr[day];
-
-            // this creates the current forecast
+            console.log(date)
             var currentDate = $("<div>").text(dayOfWeek + ", " + date);
             $("#current").append(currentDate, currentCity, currentImg, currentTemp, currentHumid, currentWind, currentUVI);
 
@@ -87,6 +85,7 @@ $(document).ready(function () {
             };
         });
     });
+
 
     function getWeather() {
 
@@ -126,6 +125,11 @@ $(document).ready(function () {
                 console.log(date)
                 var currentDate = $("<div>").text(dayOfWeek + ", " + date);
                 $("#current").append(currentDate, currentCity, currentImg, currentTemp, currentHumid, currentWind, currentUVI);
+
+                if (cityNameArr == null) {
+                    cityNameArr = [];
+                    cityNameArr.unshift(cityName);
+                }
 
                 if (cityNameArr.includes(cityName) == false) {
                     cityNameArr.unshift(cityName);
@@ -190,7 +194,6 @@ $(document).ready(function () {
         getWeather();
 
     });
-
     // click event for recent search buttons
     $(".reSearch").on("click", function () {
         $("#current").empty();
