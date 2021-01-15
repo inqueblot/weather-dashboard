@@ -17,7 +17,7 @@ $(document).ready(function () {
     var lastCity = localStorage.getItem("current search");
 
     queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + lastCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
-    console.log(queryURL)
+    
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -46,7 +46,8 @@ $(document).ready(function () {
             var currentUVI = $("<div>").text(uvI);
             var dayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
             var dayOfWeek = dayArr[day];
-            console.log(date)
+          
+            // this creates the current forecast
             var currentDate = $("<div>").text(dayOfWeek + ", " + date);
             $("#current").append(currentDate, currentCity, currentImg, currentTemp, currentHumid, currentWind, currentUVI);
 
@@ -83,9 +84,8 @@ $(document).ready(function () {
             };
         });
     });
-
-
-    function getWeather() {
+  
+function getWeather() {
 
         $("#future").empty();
         $("#current").empty();
@@ -187,6 +187,7 @@ $(document).ready(function () {
         getWeather();
 
     });
+
     // click event for recent search buttons
     $(".reSearch").on("click", function () {
         $("#current").empty();
