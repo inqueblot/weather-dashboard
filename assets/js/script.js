@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     var now = moment();
+    var cityNameArr = [];
     console.log(now);
     var date = now._d.getDate();
     var day = now._d.getDay()
@@ -43,14 +44,25 @@ $(document).ready(function () {
                 var currentUVI = $("<div>").text(uvI);
                 var dayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                 var dayOfWeek = dayArr[day];
+                console.log(date)
                 var currentDate = $("<div>").text(dayOfWeek + ", " + date);
                 $("#current").append(currentDate, currentCity, currentImg, currentTemp, currentHumid, currentWind, currentUVI);
-                var cityNameArr = [];
-                cityNameArr.push(cityName);
+
+                cityNameArr.unshift(cityName);
+                if (cityNameArr.length == 6) {
+                    cityNameArr.pop();
+                };
+                $("#cityBtn").empty();
+
                 for (let i = 0; i < cityNameArr.length; i++) {
                     var cityButton = $("<button>").text(cityNameArr[i]);
                     $("#cityBtn").append(cityButton);
-                }
+
+                };
+
+
+
+                console.log(cityNameArr);
 
 
                 // this creates the future forecast
@@ -60,7 +72,7 @@ $(document).ready(function () {
                     var futureHumidity = regards.daily[i].humidity;
                     var futureIcon = regards.daily[i].weather[0].icon;
                     var futureDay = dayArr[day + i];
-                    var futureDate = date++;
+                    var futureDate = date + [i];
 
                     var future = $("<h5>").text(futureDay + ", " + futureDate);
                     future.addClass("card-title")
