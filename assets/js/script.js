@@ -1,16 +1,19 @@
 $(document).ready(function () {
 
     var now = moment();
-    var cityNameArr = [];
+    // var cityNameArr = [];
     console.log(now);
     var date = now._d.getDate();
-    var day = now._d.getDay()
-    console.log(date)
-    console.log(day)
-    var recentSearch = localStorage.getItem("recent search")
-    var lastCity = localStorage.getItem("current search")
-    console.log(typeof recentSearch)
-    console.log(lastCity)
+    var day = now._d.getDay();
+
+    var cityNameArr = JSON.parse(localStorage.getItem("recent search"));
+
+    for (let i = 0; i < cityNameArr.length; i++) {
+        var cityButton = $("<button>").text(cityNameArr[i]);
+        $("#cityBtn").append(cityButton);
+    };
+
+    var lastCity = localStorage.getItem("current search");
 
     // console.log("hello world")
     function getWeather() {
@@ -67,8 +70,7 @@ $(document).ready(function () {
                     $("#cityBtn").append(cityButton);
                 };
 
-                localStorage.setItem('recent search', cityNameArr)
-                localStorage.setItem("current search", cityName)
+
 
 
 
@@ -110,6 +112,8 @@ $(document).ready(function () {
 
 
                 };
+                localStorage.setItem('recent search', JSON.stringify(cityNameArr))
+                localStorage.setItem("current search", cityName)
             });
         });
     };
