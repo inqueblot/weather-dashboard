@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     var lastCity = localStorage.getItem("current search");
 
-    queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + lastCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
+    queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + lastCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
 
     $.ajax({
         url: queryURL,
@@ -92,7 +92,7 @@ $(document).ready(function () {
         $("#future").empty();
         $("#current").empty();
         var searchCity = $("#cityName").val().trim();
-        queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + searchCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
+        queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
         console.log(queryURL)
         $.ajax({
             url: queryURL,
@@ -199,7 +199,7 @@ $(document).ready(function () {
         $("#current").empty();
         $("#future").empty();
         lastCity = $(this).text();
-        queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + lastCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
+        queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + lastCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
         console.log(queryURL)
         $.ajax({
             url: queryURL,
