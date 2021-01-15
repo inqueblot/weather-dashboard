@@ -10,6 +10,7 @@ $(document).ready(function () {
     var recentSearch = localStorage.getItem("recent search")
     var lastCity = localStorage.getItem("current search")
     console.log(typeof recentSearch)
+    console.log(lastCity)
 
     // console.log("hello world")
     function getWeather() {
@@ -51,7 +52,11 @@ $(document).ready(function () {
                 var currentDate = $("<div>").text(dayOfWeek + ", " + date);
                 $("#current").append(currentDate, currentCity, currentImg, currentTemp, currentHumid, currentWind, currentUVI);
 
-                cityNameArr.unshift(cityName);
+                if (cityNameArr.includes(cityName) == false) {
+                    cityNameArr.unshift(cityName);
+                };
+
+
                 if (cityNameArr.length == 6) {
                     cityNameArr.pop();
                 };
@@ -77,7 +82,7 @@ $(document).ready(function () {
                     var futureHumidity = regards.daily[i].humidity;
                     var futureIcon = regards.daily[i].weather[0].icon;
                     var futureDay = dayArr[day + i];
-                    var futureDate = date + [i];
+                    var futureDate = date + i;
 
                     var future = $("<h5>").text(futureDay + ", " + futureDate);
                     future.addClass("card-title")
