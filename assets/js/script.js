@@ -1,13 +1,20 @@
 $(document).ready(function () {
-    // console.log("hello world")
 
-    $("#submitBtn").on("click", function (event) {
-        event.preventDefault();
+    var now = moment();
+    console.log(now);
+    var date = now._d.getDate();
+    var day = now._d.getDay()
+    console.log(date)
+    console.log(day)
+
+    // console.log("hello world")
+    function getWeather() {
+
         $("#future").empty();
         $("#current").empty();
         var searchCity = $("#cityName").val().trim();
         queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + searchCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
-
+        console.log(queryURL)
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -21,6 +28,9 @@ $(document).ready(function () {
             var cityLat = response.coord.lat;
             var cityLon = response.coord.lon;
 
+
+
+
             querxURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&appid=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
 
             $.ajax({
@@ -28,7 +38,7 @@ $(document).ready(function () {
                 method: "GET"
             }).then(function (regards) {
                 var uvI = regards.current.uvi;
-                var currentCity = $("<div>").text(cityName);
+                var currentCity = $("<div>").text(cityName + " Weather");
                 var currentImg = $("<img>").attr("src", "https://openweathermap.org/img/w/" + cityIcon + ".png");
                 var currentTemp = $("<div>").text(cityTemp + "\xb0");
                 var currentHumid = $("<div>").text(cityHumid + "%");
@@ -37,35 +47,39 @@ $(document).ready(function () {
 
                 $("#current").append(currentCity, currentImg, currentTemp, currentHumid, currentWind, currentUVI);
 
-
-                console.log(regards);
-
                 // this creates the future forecast
-                for (let i = 1; i < 8; i++) {
+                for (let i = 1; i < 6; i++) {
 
                     var futureTemp = regards.daily[i].temp.day;
                     var futureHumidity = regards.daily[i].humidity;
                     var futureIcon = regards.daily[i].weather[0].icon;
-                    var img = $("<img>").attr("src", "https://openweathermap.org/img/w/" + futureIcon + ".png");
-                    var span = $("<div>").text("temp: " + futureTemp + "\xb0")
-                    var span2 = $("<div>").text("humidity: " + futureHumidity + "%")
-                    console.log(img)
-                    $("#future").append(img);
-                    $("#future").append(span);
-                    $("#future").append(span2);
+                    var card = $("<div>");
+                    card.addClass("card");
+                    card.attr("style", "width:10rem")
+
+                    var img = $("<img>");
+                    img.attr("src", "https://openweathermap.org/img/w/" + futureIcon + ".png");
+                    img.addClass("card-img-top");
+
+                    var span = $("<div>").text("temp: " + futureTemp + "\xb0");
+                    span.addClass("card-text");
+                    var span2 = $("<div>").text("humidity: " + futureHumidity + "%");
+                    span2.addClass("card-text");
+
+                    $("#future").append(card);
+                    card.append(img);
+                    card.append(span);
+                    card.append(span2);
+
 
                 };
-
             });
         });
+    };
 
-
-
-
+    $("#submitBtn").on("click", function (event) {
+        event.preventDefault();
+        getWeather();
 
     });
-
-
-
-
 });

@@ -1,3 +1,7 @@
 h1 {
-border: 5px solid red  
+background-color: black;
+border: 5px solid red;
+color: white;
+padding: 70px 70px 70px 70px;
+
 }
