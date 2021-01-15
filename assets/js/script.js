@@ -28,9 +28,6 @@ $(document).ready(function () {
             var cityLat = response.coord.lat;
             var cityLon = response.coord.lon;
 
-
-
-
             querxURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&appid=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
 
             $.ajax({
@@ -44,8 +41,17 @@ $(document).ready(function () {
                 var currentHumid = $("<div>").text(cityHumid + "%");
                 var currentWind = $("<div>").text(cityWind + " MPH");
                 var currentUVI = $("<div>").text(uvI);
+                var dayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+                var dayOfWeek = dayArr[day];
+                var currentDate = $("<div>").text(dayOfWeek + ", " + date);
+                $("#current").append(currentDate, currentCity, currentImg, currentTemp, currentHumid, currentWind, currentUVI);
+                var cityNameArr = [];
+                cityNameArr.push(cityName);
+                for (let i = 0; i < cityNameArr.length; i++) {
+                    var cityButton = $("<button>").text(cityNameArr[i]);
+                    $("#cityBtn").append(cityButton);
+                }
 
-                $("#current").append(currentCity, currentImg, currentTemp, currentHumid, currentWind, currentUVI);
 
                 // this creates the future forecast
                 for (let i = 1; i < 6; i++) {
@@ -53,6 +59,12 @@ $(document).ready(function () {
                     var futureTemp = regards.daily[i].temp.day;
                     var futureHumidity = regards.daily[i].humidity;
                     var futureIcon = regards.daily[i].weather[0].icon;
+                    var futureDay = dayArr[day + i];
+                    var futureDate = date++;
+
+                    var future = $("<h5>").text(futureDay + ", " + futureDate);
+                    future.addClass("card-title")
+
                     var card = $("<div>");
                     card.addClass("card");
                     card.attr("style", "width:10rem")
@@ -68,8 +80,11 @@ $(document).ready(function () {
 
                     $("#future").append(card);
                     card.append(img);
+                    card.append(future);
                     card.append(span);
                     card.append(span2);
+
+
 
 
                 };
