@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     var lastCity = localStorage.getItem("current search");
 
-    queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + lastCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
+    queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + lastCity + "&APPID=${putAPIkeyhere}&units=imperial"
 
     $.ajax({
         url: queryURL,
