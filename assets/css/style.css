@@ -3,5 +3,20 @@ background-color: black;
 border: 5px solid red;
 color: white;
 padding: 70px 70px 70px 70px;
+}
 
+label {
+    font-weight: bolder;
+}
+
+.card {
+    margin-left: 10px;
+}
+
+#current {
+    font-size: 25px;
+}
+
+#form {
+    /* margin-left: 50px; */
 }

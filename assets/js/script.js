@@ -8,8 +8,9 @@ $(document).ready(function () {
 
     if (cityNameArr != null) {
         for (let i = 0; i < cityNameArr.length; i++) {
-            var cityButton = $("<button>").text(cityNameArr[i]);
+            var cityButton = $("<li>").text(cityNameArr[i]);
             cityButton.addClass("reSearch");
+            cityButton.addClass("list-group-item list-group-item-action")
             $("#cityBtn").append(cityButton);
         };
 
@@ -142,8 +143,9 @@ $(document).ready(function () {
                 $("#cityBtn").empty();
 
                 for (let i = 0; i < cityNameArr.length; i++) {
-                    var cityButton = $("<button>").text(cityNameArr[i]);
+                    var cityButton = $("<li>").text(cityNameArr[i]);
                     cityButton.addClass("reSearch");
+                    cityButton.addClass("list-group-item list-group-item-action")
                     $("#cityBtn").append(cityButton);
                 };
                 // generate button listener
@@ -197,10 +199,12 @@ $(document).ready(function () {
     });
     // click event for recent search buttons
     function searchListener() {
-        $(".reSearch").on("click", function () {
+        $("#cityBtn").on("click", "li", function () {
+
             $("#current").empty();
             $("#future").empty();
             lastCity = $(this).text();
+            console.log(lastCity);
             queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + lastCity + "&APPID=d851f45e5118d3cc096ba04daa669f4a&units=imperial"
             console.log(queryURL)
             $.ajax({
