@@ -10,7 +10,7 @@ Weather info is pulled from the [open weather map](https://openweathermap.org/) 
 
 
 
-![example of website](https://github.com/inqueblot/weather-dashboard/blob/main/images/website.JPG?raw=true)
+![example of website](https://github.com/inqueblot/weather-dashboard/blob/main/assets/images/website.JPG?raw=true)
 
 ## Features
 - User is able to search over 200,000 cities
